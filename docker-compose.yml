@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -17,7 +17,6 @@ services:
     tty: true
     environment:
       - RAILS_ENV=development
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
       - BUNDLE_GEMFILE=/app/Gemfile
       - BUNDLE_ENV=development
   quiz_db:
@@ -30,11 +29,8 @@ services:
     expose:
       - 5432
     volumes:
-      - db:/var/lib/postgresql/data
+      - quiz_db:/var/lib/postgresql/data
 volumes:
   bundler_gems:
-  db:
+  quiz_db:
     driver: local
-
-
-
