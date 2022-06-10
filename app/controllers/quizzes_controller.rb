@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
   before_action :set_quiz
 
   def index
@@ -16,7 +16,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
     @quiz.user = current_user
     if @quiz.save
-      redirect_to @quiz
+      redirect_to quizzes_path
     else
       render :new
     end
@@ -42,11 +42,11 @@ class QuizzesController < ApplicationController
   private
 
   def set_quiz
-    @quiz = Quiz.find(params[:id])
+    @quiz ||= Quiz.find_by_id(params[:id])
   end
 
   def quiz_params
-    params.require(:quiz).permit(:name, questions_attributes: [:id, :title, :_destroy])
+    params.require(:quiz).permit(:name, questions_attributes: [:id, :name, :_destroy])
   end
 
 end

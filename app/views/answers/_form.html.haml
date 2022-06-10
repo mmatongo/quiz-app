@@ -1,0 +1,8 @@
+- form_with url: answers_path, method: :post do |f|
+  - @quiz.questions.each do |question|
+    .mb-3.col-md-6
+      = f.label "#{question.title}", class: "form-label"
+      %input.form-control.form-control-lg.form-control-plaintext.form-control-sm
+        = f.text_field :answer, name: "answer[#{question.id}]"
+  = f.hidden_field :quiz_id, value: @quiz.id
+  = f.submit class: "button is-primary"

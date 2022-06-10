@@ -1,0 +1,28 @@
+.container-fluid
+  .row
+    .col-12
+      .page-title-box
+        %h4.page-title= 'Quiz/' + @quiz.name
+  .row
+    .col-12
+      .card
+        .card-body
+          .row
+            .col-sm-12
+              %h5 Questions in this quiz:
+              %hr/
+              %ol
+                - @quiz.questions.each do |question|
+                  %li= question.title
+                  - if question.answers.exists?
+                    .ms-5.mt-0.col-md-6
+                      %table.table.table-sm{:style => "border-collapse: unset;"}
+                        %thead
+                          %th Answers
+                          %th Given By
+                        - question.answers.each do |answer|
+                          %tbody
+                            %tr
+                              %td= answer.response
+                              %td= answer.user.name
+                  %br/

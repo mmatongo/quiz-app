@@ -1,0 +1,33 @@
+.columns.is-flex-direction-column
+  .column.is-flex-direction-column
+    %h1.name All Quizzes
+    - if @quizzes.any?
+      %ul.list
+        - @quizzes.each do |quiz|
+          %li.list-item
+            %a{:href => "#{quiz_path(quiz)}"}
+              = quiz.name
+    - else
+      %p No quizzes yet.
+  .column
+  .container.columns.is-flex-direction-column.is-align-items-center
+    - if current_user.admin?
+      %a.button.is-primary{:href => new_quiz_path}
+        New Quiz
+      %table.table.is-narrow.is-hoverable
+        %thead
+          %tr
+            %th Title
+            %th Description
+            %th Created at
+            %th Updated at
+            %th Actions
+        %tbody
+          - @quizzes.each do |quiz|
+            %tr
+              %td= quiz.title
+              %td= quiz.created_at
+              %td
+                %a{:href => "#{edit_quiz_path(quiz)}"} Edit
+                %a{:href => "#{quiz_path(quiz)}"} Show
+                %a{"data-confirm" => "Are you sure?", "data-method" => "delete", :href => "#{quiz_path(quiz)}"} Delete

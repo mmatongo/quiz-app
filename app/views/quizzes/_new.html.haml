@@ -1,0 +1,6 @@
+%h1{:class => "title is-4>Create a Quiz"}
+  %form{:action => "/quizzes", :method => "post"} 
+    %input{:type => "hidden", :name => "_method", :value => "post"}
+    %input{:type => "hidden", :name => "quiz[user_id]", :value => current_user.id}
+    %input{:type => "text", :name => "quiz[name]", :placeholder => "Title"}
+    %input{:type => "submit", :value => "Create"}
