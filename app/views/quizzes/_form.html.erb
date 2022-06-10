@@ -1,0 +1,19 @@
+<%= form_with model: @quiz do |f| %>
+  <h1 class="title is-4">Create a Quiz</h1>
+  <div class="field">
+    <%= form.label :name, 'Title' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+  <h3 class="title is-4">Questions</h3>
+    <% @quiz.questions.each do |q| %>
+        <div class="field">
+            <%= form.label :title, 'Title' %>
+            <%= form.text_field :title, class: 'input' %>
+        </div>
+        <div class="field">
+            <%= form.label :response, 'Answer' %>
+            <%= form.text_field :response, class: 'input' %>
+        </div>
+    <% end %>
+  <%= form.submit 'Create', class: 'button is-primary' %>
+<% end %>

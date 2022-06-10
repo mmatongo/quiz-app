@@ -1,0 +1,49 @@
+<div class="columns is-flex-direction-column">
+    <div class="column is-flex-direction-column">
+        <h1 class="title">Quizzes</h1>
+        <% if @quizzes.any? %>
+        <ul class="list">
+            <% @quizzes.each do |quiz| %>
+            <li class="list-item">
+                <a href="<%= quiz_path(quiz) %>">
+                <%= quiz.title %>
+                </a>
+            </li>
+            <% end %>
+        </ul>
+        <% else %>
+        <p>No quizzes yet.</p>
+        <% end %>
+    </div>
+    <div class="column">
+        <%= render 'quizzes/new' %>
+    </div>
+    <div class="container columns is-flex-direction-column is-align-items-center">
+        <% if current_user.admin? %>
+    <table class="table is-narrow is-hoverable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @quizzes.each do |quiz| %>
+            <tr>
+                <td><%= quiz.title %></td>
+                <td><%= quiz.description %></td>
+                <td><%= quiz.created_at %></td>
+                <td><%= quiz.updated_at %></td>
+                <td>
+                    <a href="<%= edit_quiz_path(quiz) %>">Edit</a>
+                    <a href="<%= quiz_path(quiz) %>">Show</a>
+                    <a href="<%= quiz_path(quiz) %>" data-method="delete" data-confirm="Are you sure?">Delete</a>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
