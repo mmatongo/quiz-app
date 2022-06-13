@@ -12,8 +12,7 @@
   .column
   .container.columns.is-flex-direction-column.is-align-items-center
     - if current_user.admin?
-      %a.button.is-primary{:href => new_quiz_path}
-        New Quiz
+    = link_to "New Quiz", new_quiz_path , class: "button is-primary"
       %table.table.is-narrow.is-hoverable
         %thead
           %tr

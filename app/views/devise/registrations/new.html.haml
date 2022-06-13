@@ -3,8 +3,8 @@
   = render "devise/shared/error_messages", resource: resource
   .field
     = f.label :name
-    .control
-      = f.text_field :name
+    %br/
+    = f.text_field :name, class: "form-control", placeholder: "Name"
   .field
     = f.label :email
     %br/
